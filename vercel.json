@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     { 
-      "src": "backend/server.js", 
+      "src": "backend/serverless.js", 
       "use": "@vercel/node" 
     },
     { 
@@ -12,8 +12,35 @@
     }
   ],
   "routes": [
-    { "src": "/api/(.*)", "dest": "backend/server.js" },
-    { "src": "/(.*)", "dest": "frontend/build/$1" }
+    { 
+      "src": "/api/(.*)", 
+      "dest": "backend/serverless.js"
+    },
+    {
+      "src": "/static/(.*)",
+      "headers": { "cache-control": "s-maxage=31536000, immutable" },
+      "dest": "frontend/build/static/$1"
+    },
+    {
+      "src": "/favicon.ico",
+      "dest": "frontend/build/favicon.ico"
+    },
+    {
+      "src": "/logo192.png",
+      "dest": "frontend/build/logo192.png"
+    },
+    {
+      "src": "/logo512.png",
+      "dest": "frontend/build/logo512.png"
+    },
+    {
+      "src": "/manifest.json",
+      "dest": "frontend/build/manifest.json"
+    },
+    { 
+      "src": "/(.*)", 
+      "dest": "frontend/build/index.html"
+    }
   ],
   "env": {
     "NODE_ENV": "production"

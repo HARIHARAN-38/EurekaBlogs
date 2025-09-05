@@ -8,18 +8,33 @@ const { connectDB } = require('./models/mongodb');
 const blogRoutes = require('./routes/blogRoutes');
 const authRoutes = require('./routes/authRoutes');
 
+// Initialize mongoose connection only once
+let cachedDb = null;
+async function initializeDb() {
+  if (cachedDb) {
+    console.log('Using existing database connection');
+    return cachedDb;
+  }
+  
+  console.log('Creating new database connection');
+  await connectDB();
+  cachedDb = true;
+  return cachedDb;
+}
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Connect to MongoDB
-console.log('Connecting to MongoDB...');
-connectDB()
+// Connect to MongoDB (will be called on each request in serverless environment)
+initializeDb()
   .then(() => {
-    console.log('MongoDB connected successfully');
+    console.log('MongoDB connection initialized');
   })
   .catch(err => {
     console.error('MongoDB connection failed:', err.message);
-    process.exit(1);
+    if (process.env.NODE_ENV !== 'production') {
+      process.exit(1);
+    }
   });
 
 // Middleware
@@ -54,14 +69,23 @@ app.get('/', (req, res) => {
   res.send('Welcome to Eureka Blogs API - MongoDB Edition');
 });
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+// For Vercel serverless functions, we don't need to listen on a port
+// But we still want to listen when running locally
+if (process.env.NODE_ENV !== 'production' || process.env.VERCEL_ENV === undefined) {
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
+}
 
 // Handle unhandled promise rejections
 process.on('unhandledRejection', (err) => {
-  console.log('UNHANDLED REJECTION! 💥 Shutting down...');
+  console.log('UNHANDLED REJECTION! 💥');
   console.log(err.name, err.message);
-  process.exit(1);
+  // Don't exit the process in production as it could cause Vercel issues
+  if (process.env.NODE_ENV !== 'production') {
+    process.exit(1);
+  }
 });
+
+// Export the Express app
+module.exports = app;
