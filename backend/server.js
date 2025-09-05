@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const mongoose = require('mongoose');
 const { connectDB } = require('./models/mongodb');
 
 // Import routes
@@ -11,10 +12,23 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Connect to MongoDB
-connectDB();
+console.log('Connecting to MongoDB...');
+connectDB()
+  .then(() => {
+    console.log('MongoDB connected successfully');
+  })
+  .catch(err => {
+    console.error('MongoDB connection failed:', err.message);
+    process.exit(1);
+  });
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: process.env.NODE_ENV === 'production' 
+    ? ['https://eureka-blogs.vercel.app', process.env.FRONTEND_URL || 'https://eureka-blogs.vercel.app'] 
+    : 'http://localhost:3000',
+  credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -24,12 +38,20 @@ app.use('/api/auth', authRoutes);
 
 // Health check endpoint
 app.get('/health', (req, res) => {
-  res.status(200).json({ status: 'OK', message: 'Server is healthy' });
+  const dbStatus = mongoose.connection.readyState === 1 ? 'connected' : 'disconnected';
+  res.status(200).json({ 
+    status: 'OK', 
+    message: 'Server is healthy',
+    database: {
+      type: 'MongoDB',
+      status: dbStatus
+    }
+  });
 });
 
 // Root endpoint
 app.get('/', (req, res) => {
-  res.send('Welcome to Eureka Blogs API');
+  res.send('Welcome to Eureka Blogs API - MongoDB Edition');
 });
 
 // Start server

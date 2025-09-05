@@ -1,3 +1,4 @@
+````markdown
 # Eureka Blogs
 
 A full-stack blog application inspired by [Citizens of Science](https://citizensofscience.com/).
@@ -23,52 +24,38 @@ A full-stack blog application inspired by [Citizens of Science](https://citizens
 
 ### Backend
 - Node.js with Express
-- MySQL database
-- Sequelize ORM
+- MongoDB with Mongoose
 - JWT Authentication
 
 ## Getting Started
 
-See [SETUP.md](SETUP.md) for detailed setup instructions.
+### Local Development
 
-## Quick Start
-
-### Option 1: Using the Local Setup Script
-Run the local setup script which will install dependencies and guide you through the setup process:
-
-```bash
-./local_setup.sh
-```
-
-### Option 2: Manual Setup
 Install all dependencies and start both servers:
 
 ```bash
 # Install dependencies for all projects
 npm run install:all
 
-# Set up the database (you'll be prompted for MySQL password)
-npm run setup:db
-
 # Start both frontend and backend servers
 npm start
 ```
 
-### Option 3: Using Docker
-If you prefer using Docker:
-
-```bash
-docker-compose up
-```
-
 Then visit http://localhost:3000 to access the application.
 
-## Deployment
+## Deployment to Vercel
 
-The application can be deployed on:
-- Frontend: Vercel, Netlify
-- Backend: Render, Heroku, AWS
-- Database: Any MySQL-compatible database service
+### Prerequisites
+- A MongoDB Atlas account with a configured cluster
+- A Vercel account linked to your GitHub repository
+
+### Deployment Steps
+1. Push your code to GitHub
+2. Import your repository to Vercel
+3. Configure the following environment variables in Vercel:
+   - `MONGODB_URI`: Your MongoDB connection string
+   - `JWT_SECRET`: A secure random string for JWT token signing
+4. Deploy!
 
 ## License
 

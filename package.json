@@ -1,7 +1,7 @@
 {
   "name": "eureka-blogs",
   "version": "1.0.0",
-  "description": "Full-stack blog application with React frontend and Node.js/MySQL backend",
+  "description": "Full-stack blog application with React frontend and Node.js/MongoDB backend",
   "main": "index.js",
   "scripts": {
     "start": "concurrently \"npm run server\" \"npm run client\"",
@@ -9,14 +9,15 @@
     "client": "cd frontend && npm start",
     "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install",
     "build": "cd frontend && npm run build",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "setup:db": "mysql -u root -p < ./backend/db/setup.sql"
+    "vercel-build": "npm run install:all && npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "blog",
     "react",
     "node",
-    "mysql",
+    "mongodb",
+    "mongoose",
     "fullstack"
   ],
   "author": "HARIHARAN-38",
