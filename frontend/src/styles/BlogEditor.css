@@ -1,0 +1,155 @@
+.blog-editor {
+  padding: 2rem 0;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.blog-editor h1 {
+  margin-bottom: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1px solid var(--gray-300);
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+}
+
+.form-control:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+  outline: none;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.form-group-half {
+  flex: 1;
+  min-width: 200px;
+  width: calc(50% - 0.5rem);
+}
+
+@media (max-width: 640px) {
+  .form-row {
+    flex-direction: column;
+  }
+  
+  .form-group-half {
+    width: 100%;
+  }
+}
+
+.content-editor {
+  font-family: 'Courier New', Courier, monospace;
+  line-height: 1.6;
+  min-height: 300px;
+}
+
+.editor-help {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0.5rem;
+}
+
+.editor-help a {
+  font-size: 0.875rem;
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.editor-help a:hover {
+  text-decoration: underline;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.form-actions button {
+  min-width: 120px;
+  padding: 0.75rem 1rem;
+}
+
+@media (max-width: 480px) {
+  .form-actions {
+    justify-content: stretch;
+  }
+  
+  .form-actions button {
+    flex: 1;
+  }
+}
+
+/* Preview Panel */
+.preview-panel {
+  margin-top: 2rem;
+  padding: 2rem;
+  border: 1px solid var(--gray-300);
+  border-radius: var(--border-radius);
+  background-color: white;
+}
+
+.preview-panel h2 {
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.preview-content img {
+  max-width: 100%;
+  height: auto;
+  margin: 1rem 0;
+}
+
+.preview-toggle {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--gray-300);
+  padding-bottom: 0.5rem;
+}
+
+.preview-toggle button {
+  background: none;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--gray-600);
+  border-bottom: 2px solid transparent;
+  position: relative;
+  top: 1px;
+  transition: all 0.2s ease;
+}
+
+.preview-toggle button.active {
+  color: var(--primary-color);
+  border-bottom-color: var(--primary-color);
+}
+
+.preview-toggle button:hover:not(.active) {
+  color: var(--gray-800);
+  background-color: var(--gray-100);
+}

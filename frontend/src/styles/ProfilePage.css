@@ -1,0 +1,130 @@
+.profile-page {
+  padding-top: 1rem;
+}
+
+/* Banner */
+.profile-banner {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: #fff;
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.profile-banner .banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at top right, rgba(255,255,255,.2), transparent 60%);
+  pointer-events: none;
+}
+
+.profile-header {
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+}
+
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid rgba(255, 255, 255, 0.7);
+  box-shadow: var(--shadow);
+  flex-shrink: 0;
+}
+
+.profile-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.profile-info h1 {
+  margin: 0 0 .25rem;
+  color: #fff;
+}
+
+.profile-info .user-role {
+  color: rgba(255,255,255,.9);
+  margin-bottom: .5rem;
+}
+
+.user-stats {
+  display: flex;
+  gap: 1rem;
+}
+
+.user-stats .stat {
+  background: rgba(255,255,255,.15);
+  border: 1px solid rgba(255,255,255,.2);
+  color: #fff;
+  padding: .5rem .75rem;
+  border-radius: .5rem;
+  display: flex;
+  align-items: baseline;
+  gap: .5rem;
+}
+
+.stat-number {
+  font-weight: 700;
+  font-size: 1.125rem;
+}
+
+.stat-label {
+  font-size: .85rem;
+  opacity: .9;
+}
+
+/* Tabs */
+.profile-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin: 1rem 0 1.5rem;
+}
+
+.tab-button {
+  padding: .5rem .875rem;
+  border: 1px solid var(--gray-300);
+  background: #fff;
+  border-radius: 999px;
+  color: var(--gray-800);
+}
+
+.tab-button.active {
+  background: var(--primary-color);
+  color: #fff;
+  border-color: var(--primary-color);
+}
+
+/* Sections */
+.profile-content h2 {
+  margin: .25rem 0 1rem;
+}
+
+.articles-section .articles-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.articles-section .blog-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .profile-avatar { width: 96px; height: 96px; }
+  .articles-section .blog-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1024px) {
+  .articles-section .blog-grid { grid-template-columns: repeat(3, 1fr); }
+}
